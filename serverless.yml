@@ -1,0 +1,22 @@
+service: typescript-s3-trigger
+frameworkVersion: '3'
+org: nelsoncode019
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - s3:
+          bucket: photos5452524fda
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploads/
+            - suffix: .png
+
+plugins:
+  - serverless-plugin-typescript
